@@ -1,0 +1,93 @@
+<h1 mat-dialog-title>Order Details</h1>
+<div mat-dialog-content>
+  <table mat-table [dataSource]="ducks" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let duck">{{duck.id}}</td>
+      <td mat-footer-cell *matFooterCellDef>Total</td>
+    </ng-container>
+
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef>Color</th>
+      <td mat-cell *matCellDef="let duck">{{duck.color}}</td>
+      <td mat-footer-cell *matFooterCellDef>{{""}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef>Size</th>
+      <td mat-cell *matCellDef="let duck">{{duck.size}}</td>
+      <td mat-footer-cell *matFooterCellDef>{{""}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let duck">{{duck.price}}</td>
+      <td mat-footer-cell *matFooterCellDef>{{""}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let duck">{{duck.quantity}}</td>
+      <td mat-footer-cell *matFooterCellDef>{{""}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="provider">
+      <th mat-header-cell *matHeaderCellDef>Provider</th>
+      <td mat-cell *matCellDef="let duck">{{duck.provider}}</td>
+      <td mat-footer-cell *matFooterCellDef>{{""}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef>Country</th>
+      <td mat-cell *matCellDef="let duck">{{duck.country}}</td>
+      <td mat-footer-cell *matFooterCellDef>{{""}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let duck">{{duck.quantity * duck.price}}</td>
+      <td mat-footer-cell *matFooterCellDef>{{getTotalCost()}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+
+  <div class="row" style="display: flex; justify-content: flex-end">
+    <span>Package type: &nbsp;</span>
+    <span>{{ orderDetail?.packageType }}</span>
+  </div>
+
+  <div class="row" style="display: flex; justify-content: flex-end">
+    <span>Protection type: &nbsp;</span>
+    <span>{{ orderDetail?.protectionType }}</span>
+  </div>
+  <div class="row">
+    <span>Increments</span>
+    <div
+      *ngFor="let increment of orderDetail?.increments"
+      style="display: flex; justify-content: flex-end"
+    >
+      <span>{{ increment.name }} &nbsp; :</span>
+      <span>{{ increment.increment }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <span>Discounts</span>
+    <div
+      *ngFor="let discount of orderDetail?.discounts"
+      style="display: flex; justify-content: flex-end"
+    >
+      <span>{{ discount.name }}&nbsp; :</span>
+      <span>{{ discount.discount }}</span>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="clickOK()">
+    Ok
+  </button>
+</div>
